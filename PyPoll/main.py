@@ -1,13 +1,16 @@
 import os
 import csv 
 
+#file path
 ELECTION_DATA_PATH = os.path.join('Resources', 'election_data.csv')
 ANALYSIS_FILE_PATH = os.path.join('Analysis', 'results.txt')
 
+#variables
 total_votes = 0
 candidate_votes = {}
 candidate_list=[]
 
+#opens csv file
 with open(ELECTION_DATA_PATH) as election_data_file:
 
         
@@ -15,9 +18,10 @@ with open(ELECTION_DATA_PATH) as election_data_file:
 
         next(csvreader)
 
+#loops through each row in file
         for row in csvreader:
                 total_votes += 1
-
+                #adds up votes
                 candidate_name = row[2]
                 if candidate_name not in candidate_list:
                         candidate_list.append(candidate_name)
@@ -29,7 +33,7 @@ winner_votes = 0
 candidate_output_list = []
 candidate_votes_output = []
 candidate_percentage_votes = []
-
+#determines the winner
 for candidate_name, votes in candidate_votes.items():
                 percentage = round(votes/total_votes*100, 3)
                 candidate_output_list.append(candidate_name)
@@ -39,7 +43,7 @@ for candidate_name, votes in candidate_votes.items():
                 if votes > winner_votes:
                         winner = candidate_name
                         winner_votes = votes
-
+#displays results
 output = (
         f"Election Results\n"
         f"-------------------------\n"

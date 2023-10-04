@@ -1,8 +1,10 @@
 import os
 import csv
 
+#file path
 file_path = os.path.join("Resources", "budget_data.csv")
 
+#initialize variables
 total_months = 0
 net_total = 0
 previous_profit_loss = 0
@@ -12,11 +14,13 @@ greatest_decrease = {"date": "", "amount": 0}
 
 csv_file = "financial_data.csv"
 
+#opens csv file
 with open(file_path, 'r') as file:
     reader = csv.reader(file)
+    #this skips the header
     next(reader)
 
-
+#loops through each row in csv file
     for row in reader:
         date = row[0]
         profit_loss = int(row[1])
@@ -39,9 +43,10 @@ with open(file_path, 'r') as file:
        
         previous_profit_loss = profit_loss
 
+#calculates average change
 average_change = sum(profit_loss_changes) / (total_months - 1)
 
-
+#displays results
 output = (
     f"Financial Analysis\n"
     f"----------------------------\n"
