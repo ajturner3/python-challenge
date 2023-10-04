@@ -1,7 +1,7 @@
 import os
 import csv
 
-file_path = os.path.join("./Resources", "budget_data.csv")
+file_path = os.path.join("Resources", "budget_data.csv")
 
 total_months = 0
 net_total = 0
@@ -41,10 +41,18 @@ with open(file_path, 'r') as file:
 
 average_change = sum(profit_loss_changes) / (total_months - 1)
 
-print("Financial Analysis")
-print("----------------------------")
-print(f"Total Months: {total_months}")
-print(f"Total: ${net_total}")
-print(f"Average Change: ${average_change:.2f}")
-print(f"Greatest Increase in Profits: {greatest_increase['date']} (${greatest_increase['amount']})")
-print(f"Greatest Decrease in Profits: {greatest_decrease['date']} (${greatest_decrease['amount']})")
+
+output = (
+    f"Financial Analysis\n"
+    f"----------------------------\n"
+    f"Total Months: {total_months}\n"
+    f"Total: ${net_total}\n"
+    f"Average Change: ${average_change:.2f}\n"
+    f"Greatest Increase in Profits: {greatest_increase['date']} (${greatest_increase['amount']})\n"
+    f"Greatest Decrease in Profits: {greatest_decrease['date']} (${greatest_decrease['amount']})\n")
+
+# Export the results to text file
+with open(os.path.join("analysis", "budget_analysis.txt"), "w") as txt_file:
+    txt_file.write(output)
+# Print the output (to terminal)
+print(output)
